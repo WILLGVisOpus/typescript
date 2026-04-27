@@ -19,7 +19,9 @@ steps:
         set -e
         corepack enable
         pnpm install --no-frozen-lockfile
+        chmod +x scripts/entrypoint.sh scripts/healthcheck.js 2>/dev/null || true
         pnpm build
+        chmod +x .next/standalone/entrypoint.sh 2>/dev/null || true
 
   - name: gcr.io/cloud-builders/docker
     id: docker-build
