@@ -7,6 +7,11 @@ RUN mkdir -p /.env-file && touch /.env-file/.env && chown -R nextjs:nodejs /.env
 
 COPY --chown=nextjs:nodejs .next/standalone ./
 
+# Diagnose layout + force-mark entrypoint executable.
+RUN echo "=== /app/ contents ===" && ls -la /app/ | head -20 \
+    && echo "=== entrypoint.sh ===" && (ls -la /app/entrypoint.sh 2>&1 || true) \
+    && (chmod +x /app/entrypoint.sh /app/healthcheck.js 2>/dev/null || true)
+
 USER nextjs
 ENV HOSTNAME="::" \
     PORT="3000" \
