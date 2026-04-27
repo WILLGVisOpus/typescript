@@ -40,6 +40,14 @@ export const LANGS: Lang[] = [
     name: "日本語",
     code: "ja",
   },
+  {
+    name: "Norsk bokmål",
+    code: "nb",
+  },
+  {
+    name: "Dansk",
+    code: "da",
+  },
 ];
 
 export const LANGUAGE_COOKIE_NAME = "NEXT_LOCALE";
