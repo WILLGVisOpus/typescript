@@ -1,0 +1,58 @@
+# Cloud Build pipeline: pnpm build → docker build → Artifact Registry → Cloud Run.
+#
+# Trigger:
+#   gcloud builds submit --config=cloudbuild.visopus.yaml --project=opus-test-69 .
+#
+# Output: a versioned image at
+#   europe-west2-docker.pkg.dev/opus-test-69/zitadel-images/zitadel-login:visopus-<sha>
+# and an updated zitadel-login Cloud Run service pinned to that tag.
+
+timeout: 1800s
+
+steps:
+  - name: node:22
+    id: pnpm-install-build
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        set -e
+        corepack enable
+        pnpm install --frozen-lockfile
+        pnpm build
+
+  - name: gcr.io/cloud-builders/docker
+    id: docker-build
+    args:
+      - build
+      - -t
+      - europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login:visopus-$BUILD_ID
+      - -t
+      - europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login:visopus
+      - .
+
+  - name: gcr.io/cloud-builders/docker
+    id: docker-push
+    args:
+      - push
+      - --all-tags
+      - europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    id: deploy
+    entrypoint: gcloud
+    args:
+      - run
+      - services
+      - update
+      - zitadel-login
+      - --image=europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login:visopus-$BUILD_ID
+      - --region=europe-west2
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: E2_HIGHCPU_8
+
+images:
+  - europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login:visopus-$BUILD_ID
+  - europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login:visopus

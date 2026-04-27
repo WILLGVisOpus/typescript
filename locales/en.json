@@ -23,12 +23,12 @@
     }
   },
   "loginname": {
-    "title": "Welcome back!",
-    "description": "Enter your login data.",
-    "register": "Register new user",
+    "title": "Sign in to VisOpus",
+    "description": "Enter your email address to continue.",
+    "register": "Create a new account",
     "submit": "Continue",
     "labels": {
-      "loginname": "Loginname",
+      "loginname": "Email address",
       "username": "Username",
       "usernameOrPhoneNumber": "Username or phone number",
       "usernameOrEmail": "Username or email"
