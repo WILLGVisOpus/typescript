@@ -5,6 +5,19 @@ zitadel/zitadel changes are not duplicated here.
 
 ## [Unreleased]
 
+### Added — Soft-required MFA: HMAC-signed backend client (Issue #206, Task 2.3)
+
+- **`src/lib/server/visopus-backend.ts`** — typed client for the Phase 1
+  backend endpoints. HMAC-SHA256 over `<ts>.<sha256(body)>` matching the
+  backend's `_verify_mfa_recovery_signature`. Six wrappers: `skip`,
+  `verifyRecoveryCode`, `regenerateRecoveryCodes`, `initiateFullReset`,
+  `completeFullReset`, `auditLog`.
+- Fail-fast on missing `MFA_RECOVERY_HMAC_SECRET` or
+  `BACKEND_INTERNAL_API_URL` — refuses to fire an unsigned or
+  unconfigured request. Non-2xx response throws with status + body.
+- 10 vitest tests including a cross-validated signature check (test
+  computes expected HMAC independently).
+
 ### Added — Soft-required MFA: `visopus-mfa` metadata helpers (Issue #206, Task 2.2)
 
 - **`src/lib/server/visopus-mfa.ts`** — pure helpers for the
