@@ -5,6 +5,16 @@ zitadel/zitadel changes are not duplicated here.
 
 ## [Unreleased]
 
+### Added — Soft-required MFA: `visopus-mfa` metadata helpers (Issue #206, Task 2.2)
+
+- **`src/lib/server/visopus-mfa.ts`** — pure helpers for the
+  `visopus_mfa_satisfied_via` session-metadata marker:
+  `SATISFIED_VIA_KEY`, `encodeSatisfiedVia`, `decodeSatisfiedVia`.
+- `decodeSatisfiedVia` returns `null` for missing key, missing metadata
+  bag, and zero-length values (defensive against empty-value
+  false-positives).
+- 7 vitest tests; full suite still green.
+
 ### Added — Soft-required MFA: `setSession` metadata plumbing (Issue #206, Task 2.1)
 
 - **`setSession`** (`src/lib/zitadel.ts`) now accepts an optional
