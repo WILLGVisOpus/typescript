@@ -1,0 +1,50 @@
+# Cloud Build GitHub trigger — declarative config for the visopus-customizations branch.
+#
+# Imports with:
+#   gcloud builds triggers import \
+#     --source=.cloudbuild/trigger-visopus-customizations.yaml \
+#     --project=opus-test-69
+#
+# Updates with the same command (import is upsert by name).
+#
+# Prereq (one-time): the GitHub repo WILLGVisOpus/typescript must be connected to
+# Cloud Build. Console → Cloud Build → Triggers → "Connect Repository" → GitHub
+# (Cloud Build GitHub App). This step cannot be done via gcloud builds triggers;
+# it requires the GitHub App OAuth flow.
+
+name: visopus-login-customizations
+description: |
+  Build + deploy the VisOpus-branded zitadel-login fork on every push to the
+  visopus-customizations branch. Deploys with --no-traffic + 10% canary split;
+  operator promotes to 100% manually after smoke testing.
+
+# 2nd-gen GitHub trigger (Cloud Build GitHub App).
+github:
+  owner: WILLGVisOpus
+  name: typescript
+  push:
+    branch: ^visopus-customizations$
+
+filename: cloudbuild.visopus.yaml
+
+# Cloud Build provides $BUILD_ID, $PROJECT_ID, $SHORT_SHA, $COMMIT_SHA, $BRANCH_NAME
+# automatically for triggered builds. The build steps read VERSION from the repo
+# at runtime, so no _VERSION substitution is needed here.
+substitutions:
+  _SERVICE_NAME: zitadel-login
+  _REGION: europe-west2
+
+# Stop a build queue from piling up if pushes come in faster than builds finish:
+# any new push to visopus-customizations cancels the previous in-flight build for
+# the same branch.
+includeBuildLogs: INCLUDE_BUILD_LOGS_WITH_STATUS
+
+# Service account that runs the build. Needs roles:
+#   - roles/cloudbuild.builds.builder
+#   - roles/run.admin                    (deploy + traffic split)
+#   - roles/iam.serviceAccountUser       (act-as Cloud Run runtime SA)
+#   - roles/artifactregistry.writer      (push images)
+# If unset, defaults to <PROJECT_NUMBER>-compute@developer.gserviceaccount.com
+# which usually has these via Editor role on opus-test-69. Prefer a dedicated SA
+# in production.
+# serviceAccount: projects/opus-test-69/serviceAccounts/cloudbuild-zitadel-login@opus-test-69.iam.gserviceaccount.com

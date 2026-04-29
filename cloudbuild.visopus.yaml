@@ -1,11 +1,19 @@
 # Cloud Build pipeline: pnpm build → docker build → Artifact Registry → Cloud Run.
 #
-# Trigger:
-#   gcloud builds submit --config=cloudbuild.visopus.yaml --project=opus-test-69 .
+# Two ways to run:
+#   1. Manual fallback (anyone with builds.builder role):
+#        gcloud builds submit --config=cloudbuild.visopus.yaml --project=opus-test-69 .
+#   2. Automatic on push to visopus-customizations:
+#        Triggered by .cloudbuild/trigger-visopus-customizations.yaml.
 #
-# Output: a versioned image at
-#   europe-west2-docker.pkg.dev/opus-test-69/zitadel-images/zitadel-login:visopus-<sha>
-# and an updated zitadel-login Cloud Run service pinned to that tag.
+# Output:
+#   europe-west2-docker.pkg.dev/opus-test-69/zitadel-images/zitadel-login:visopus-<BUILD_ID>      (specific, durable rollback ref)
+#   europe-west2-docker.pkg.dev/opus-test-69/zitadel-images/zitadel-login:visopus-v<VERSION>      (semver, from ./VERSION file)
+#   europe-west2-docker.pkg.dev/opus-test-69/zitadel-images/zitadel-login:visopus                 (floating, latest VisOpus build)
+#
+# Deploy strategy: new Cloud Run revision is created with --no-traffic, then 10% canary
+# split to it. Operator manually promotes to 100% after smoke-testing the canary URL.
+# See docs/DEPLOY.md for the full runbook.
 
 timeout: 1800s
 
@@ -25,13 +33,25 @@ steps:
 
   - name: gcr.io/cloud-builders/docker
     id: docker-build
+    entrypoint: bash
     args:
-      - build
-      - -t
-      - europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login:visopus-$BUILD_ID
-      - -t
-      - europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login:visopus
-      - .
+      - -c
+      - |
+        set -e
+        VERSION=$(cat VERSION | tr -d '[:space:]')
+        # $COMMIT_SHA is substituted by Cloud Build for trigger-fired builds, empty for `gcloud builds submit`.
+        # Fall back to `manual-<BUILD_ID>` so OCI revision label is always present.
+        SHA_LABEL="$COMMIT_SHA"
+        if [ -z "$$SHA_LABEL" ]; then SHA_LABEL="manual-$BUILD_ID"; fi
+        echo "Building visopus-$BUILD_ID, visopus-v$$VERSION, visopus (rev=$$SHA_LABEL)"
+        docker build \
+          --label org.opencontainers.image.revision="$$SHA_LABEL" \
+          --label org.opencontainers.image.version="v$$VERSION" \
+          --label org.opencontainers.image.source="https://github.com/WILLGVisOpus/typescript" \
+          -t europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login:visopus-$BUILD_ID \
+          -t europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login:visopus-v$$VERSION \
+          -t europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login:visopus \
+          .
 
   - name: gcr.io/cloud-builders/docker
     id: docker-push
@@ -40,16 +60,47 @@ steps:
       - --all-tags
       - europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login
 
+  # Deploy a new Cloud Run revision tagged with the version + short build id, but
+  # do NOT shift traffic to it yet (--no-traffic). The next step splits 10% canary.
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
-    id: deploy
-    entrypoint: gcloud
+    id: deploy-no-traffic
+    entrypoint: bash
     args:
-      - run
-      - services
-      - update
-      - zitadel-login
-      - --image=europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login:visopus-$BUILD_ID
-      - --region=europe-west2
+      - -c
+      - |
+        set -e
+        VERSION=$(cat VERSION | tr -d '[:space:]')
+        # Cloud Run revision tags must be lowercase, hyphens-only — no dots.
+        VERSION_TAG=$$(echo "$$VERSION" | tr '.' '-')
+        SHORT_ID=$$(echo "$BUILD_ID" | cut -c1-8)
+        REV_TAG="v$${VERSION_TAG}-$${SHORT_ID}"
+        echo "Deploying new revision with tag: $$REV_TAG (no traffic)"
+        gcloud run services update zitadel-login \
+          --image=europe-west2-docker.pkg.dev/$PROJECT_ID/zitadel-images/zitadel-login:visopus-$BUILD_ID \
+          --region=europe-west2 \
+          --tag=$$REV_TAG \
+          --no-traffic
+        # Persist the tag for the next step via workspace file.
+        echo "$$REV_TAG" > /workspace/.last_rev_tag
+
+  # 10% canary split. Manual promotion to 100% after smoke-testing:
+  #   gcloud run services update-traffic zitadel-login \
+  #     --region=europe-west2 --to-latest --project=opus-test-69
+  # Or roll back by routing 0% to the new tag:
+  #   gcloud run services update-traffic zitadel-login \
+  #     --region=europe-west2 --to-tags=<previous-tag>=100 --project=opus-test-69
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    id: canary-10pct
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        set -e
+        REV_TAG=$$(cat /workspace/.last_rev_tag)
+        echo "Splitting 10% traffic to $$REV_TAG"
+        gcloud run services update-traffic zitadel-login \
+          --region=europe-west2 \
+          --to-tags=$$REV_TAG=10
 
 options:
   logging: CLOUD_LOGGING_ONLY
