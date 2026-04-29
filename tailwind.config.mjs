@@ -40,12 +40,19 @@ types.forEach((type) => {
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  // Dark mode is controlled via the `class` attribute managed by next-themes.
+  // Default is "system" (follows OS), but a user-facing ThemeSwitch lets the
+  // visitor force light or dark.
   darkMode: "class",
   future: {
     hoverOnlyWhenSupported: true,
   },
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+      },
       // https://vercel.com/design/color
       fontSize: {
         "12px": "12px",

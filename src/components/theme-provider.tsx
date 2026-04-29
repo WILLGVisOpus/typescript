@@ -7,6 +7,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     <ThemeP
       attribute="class"
       defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
       storageKey="cp-theme"
       value={{ dark: "dark" }}
     >

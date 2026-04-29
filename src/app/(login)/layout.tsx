@@ -5,26 +5,48 @@ import { LanguageProvider } from "@/components/language-provider";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Skeleton } from "@/components/skeleton";
 import { ThemeProvider } from "@/components/theme-provider";
-import * as Tooltip from "@radix-ui/react-tooltip";
-import { Lato } from "next/font/google";
-import { ReactNode, Suspense } from "react";
 import ThemeSwitch from "@/components/theme-switch";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import { Noto_Sans, Noto_Sans_Mono } from "next/font/google";
+import { ReactNode, Suspense } from "react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-const lato = Lato({
-  weight: ["400", "700", "900"],
+const notoSans = Noto_Sans({
+  weight: ["300", "400", "500", "600", "700", "800"],
   subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const notoSansMono = Noto_Sans_Mono({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("common");
-  return { title: t("title") };
+  return {
+    title: t("title"),
+    icons: {
+      icon: [
+        { url: "/icon.svg", type: "image/svg+xml" },
+        { url: "/favicon.ico", sizes: "any" },
+      ],
+      apple: [{ url: "/icon-192.png", sizes: "192x192" }],
+    },
+    manifest: "/favicon/site.webmanifest",
+  };
 }
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html className={`${lato.className}`} suppressHydrationWarning>
+    <html
+      className={`${notoSans.variable} ${notoSansMono.variable} font-sans`}
+      suppressHydrationWarning
+    >
       <head />
       <body>
         <ThemeProvider>
@@ -38,9 +60,6 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                     <Skeleton>
                       <div className="h-40"></div>
                     </Skeleton>
-                    <div className="flex flex-row items-center justify-end space-x-4 py-4">
-                      <ThemeSwitch />
-                    </div>
                   </div>
                 </BackgroundWrapper>
               }

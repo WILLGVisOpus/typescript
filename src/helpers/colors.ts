@@ -30,14 +30,16 @@ export type ColorMap = {
   [_key in MapName]: Color[];
 };
 
-export const DARK_PRIMARY = "#2073c4";
-export const PRIMARY = "#5469d4";
+// VisOpus brand fallbacks. Light mode: navy primary on white; dark mode: amber primary on deep navy.
+// Zitadel admin BrandingSettings (if configured at runtime) will override these — see setTheme().
+export const DARK_PRIMARY = "#f59e0b";
+export const PRIMARY = "#0a1628";
 
-export const DARK_WARN = "#ff3b5b";
-export const WARN = "#cd3d56";
+export const DARK_WARN = "#ef4444";
+export const WARN = "#dc2626";
 
-export const DARK_BACKGROUND = "#111827";
-export const BACKGROUND = "#fafafa";
+export const DARK_BACKGROUND = "#0b1424";
+export const BACKGROUND = "#ffffff";
 
 export const DARK_TEXT = "#ffffff";
 export const TEXT = "#000000";
