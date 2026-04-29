@@ -1,0 +1,441 @@
+{
+  "common": {
+    "back": "Tilbage",
+    "title": "Log ind på VisOpus"
+  },
+  "accounts": {
+    "title": "Regnskaber",
+    "description": "Vælg den konto, du vil bruge.",
+    "addAnother": "Tilføj en anden konto",
+    "noResults": "Ingen konti fundet",
+    "verified": "verificeret",
+    "expired": "udløbet"
+  },
+  "logout": {
+    "title": "Log ud",
+    "description": "Klik på en konto for at afslutte sessionen",
+    "noResults": "Ingen konti fundet",
+    "clear": "Afslut session",
+    "verifiedAt": "Sidst aktive: {time}",
+    "success": {
+      "title": "Log ud lykkedes",
+      "description": "Du har logget ud."
+    }
+  },
+  "loginname": {
+    "title": "Log ind på VisOpus",
+    "description": "Indtast din e-mailadresse for at fortsætte.",
+    "register": "Opret en ny konto",
+    "submit": "Fortsætte",
+    "labels": {
+      "loginname": "E-mailadresse",
+      "username": "Brugernavn",
+      "usernameOrPhoneNumber": "Brugernavn eller telefonnummer",
+      "usernameOrEmail": "Brugernavn eller e-mail"
+    },
+    "required": {
+      "loginName": "Dette felt er påkrævet"
+    },
+    "errors": {
+      "internalError": "Der opstod en intern fejl",
+      "couldNotGetLoginSettings": "Kunne ikke hente login-indstillinger",
+      "couldNotSearchUsers": "Kunne ikke søge efter brugere",
+      "couldNotGetDomain": "Kunne ikke hente domæne",
+      "couldNotGetHost": "Kunne ikke få vært",
+      "couldNotStartIDPFlow": "Kunne ikke starte IDP-flow",
+      "moreThanOneUserFound": "Mere end én bruger fundet. Angiv en unik identifikator.",
+      "userNotFound": "Bruger ikke fundet i systemet",
+      "couldNotCreateSession": "Kunne ikke oprette session for brugeren",
+      "initialUserNotSupported": "Oprindelig bruger understøttes ikke",
+      "usernamePasswordNotAllowed": "Brugernavn Adgangskode ikke tilladt! Kontakt din administrator for at få flere oplysninger.",
+      "passkeysNotAllowed": "Adgangsnøgler er ikke tilladt! Kontakt din administrator for at få flere oplysninger.",
+      "couldNotFindIdentityProvider": "Kunne ikke finde identitetsudbyder.",
+      "userNotActive": "Brugeren er ikke aktiv. Kontakt din administrator for at få flere oplysninger."
+    }
+  },
+  "zitadel": {
+    "errors": {
+      "errorOccured": "Der opstod en fejl",
+      "multipleUsersFound": "Flere brugere fundet",
+      "userNotFound": "Bruger ikke fundet i systemet"
+    }
+  },
+  "password": {
+    "verify": {
+      "title": "Adgangskode",
+      "description": "Indtast din adgangskode.",
+      "resetPassword": "Nulstil adgangskode",
+      "submit": "Fortsætte",
+      "labels": {
+        "password": "Adgangskode"
+      },
+      "required": {
+        "password": "Dette felt er påkrævet"
+      },
+      "errors": {
+        "couldNotVerifyPassword": "Kunne ikke bekræfte adgangskoden",
+        "couldNotResetPassword": "Adgangskoden kunne ikke nulstilles"
+      },
+      "info": {
+        "passwordResetSent": "Adgangskoden blev nulstillet. Tjek venligst din e-mail"
+      }
+    },
+    "set": {
+      "title": "Indstil adgangskode",
+      "description": "Indstil adgangskoden til din konto",
+      "codeSent": "En kode er blevet sendt til din e-mailadresse.",
+      "noCodeReceived": "Har du ikke modtaget en kode?",
+      "resend": "Send kode igen",
+      "submit": "Fortsætte",
+      "labels": {
+        "code": "Kode",
+        "newPassword": "Ny adgangskode",
+        "confirmPassword": "Bekræft adgangskode"
+      },
+      "required": {
+        "code": "Dette felt er påkrævet",
+        "newPassword": "Du skal angive en adgangskode!",
+        "confirmPassword": "Dette felt er påkrævet"
+      },
+      "errors": {
+        "couldNotSetPassword": "Kunne ikke indstille adgangskoden",
+        "couldNotResetPassword": "Adgangskoden kunne ikke nulstilles",
+        "couldNotVerifyPassword": "Kunne ikke bekræfte adgangskoden"
+      }
+    },
+    "change": {
+      "title": "Skift adgangskode",
+      "description": "Indstil adgangskoden til din konto",
+      "submit": "Fortsætte",
+      "labels": {
+        "newPassword": "Ny adgangskode",
+        "confirmPassword": "Bekræft adgangskode"
+      },
+      "required": {
+        "newPassword": "Du skal angive en ny adgangskode!",
+        "confirmPassword": "Dette felt er påkrævet"
+      },
+      "errors": {
+        "couldNotChangePassword": "Kunne ikke ændre adgangskoden",
+        "couldNotVerifyPassword": "Kunne ikke bekræfte adgangskoden",
+        "unknownError": "Ukendt fejl"
+      }
+    },
+    "complexity": {
+      "length": "Skal være mindst {minLength} tegn langt.",
+      "hasSymbol": "Skal indeholde et symbol.",
+      "hasNumber": "Skal indeholde et nummer.",
+      "hasUppercase": "Skal indeholde et stort bogstav.",
+      "hasLowercase": "Skal indeholde et lille bogstav.",
+      "equals": "Adgangskodebekræftelse matchede.",
+      "matches": "Matcher",
+      "doesNotMatch": "Passer ikke"
+    },
+    "errors": {
+      "noHostFound": "Ingen vært fundet",
+      "couldNotSendResetLink": "Kunne ikke sende link til nulstilling af adgangskode",
+      "couldNotCreateSessionForUser": "Kunne ikke oprette session for brugeren",
+      "couldNotVerifyPassword": "Kunne ikke bekræfte adgangskoden",
+      "failedToAuthenticate": "Kunne ikke godkendes. Du havde {failedAttempts} af {maxPasswordAttempts} adgangskodeforsøg.{lockoutMessage}",
+      "failedToAuthenticateNoLimit": "Kunne ikke godkendes.",
+      "accountLockedContactAdmin": "Kontakt din administrator for at låse din konto op",
+      "userNotFound": "Bruger ikke fundet i systemet",
+      "initialUserNotSupported": "Oprindelig bruger understøttes ikke",
+      "userInitialStateNotSupported": "Brugerindledende tilstand understøttes ikke",
+      "codeOrVerificationRequired": "Du skal angive en kode eller have et gyldigt brugerverifikationstjek",
+      "verificationRequired": "Brugerverifikationstjek skal udføres",
+      "couldNotLoadSession": "Sessionen kunne ikke indlæses",
+      "couldNotLoadAuthMethods": "Kunne ikke indlæse godkendelsesmetoder",
+      "failedPrecondition": "Mislykket forudsætning",
+      "sessionNotValid": "Session er ikke gyldig"
+    }
+  },
+  "idp": {
+    "title": "Log ind med SSO",
+    "description": "Vælg en af ​​følgende udbydere for at logge ind",
+    "orSignInWith": "eller log ind med",
+    "signInWithApple": "Log ind med Apple",
+    "signInWithGoogle": "Log ind med Google",
+    "signInWithAzureAD": "Log ind med AzureAD",
+    "signInWithGithub": "Log ind med GitHub",
+    "signInWithGitlab": "Log ind med GitLab",
+    "loginSuccess": {
+      "title": "Login lykkedes",
+      "description": "Du er blevet logget ind!"
+    },
+    "linkingSuccess": {
+      "title": "Konto knyttet",
+      "description": "Du har linket din konto med succes!"
+    },
+    "registerSuccess": {
+      "title": "Registreringen lykkedes",
+      "description": "Du har registreret dig med succes!"
+    },
+    "loginError": {
+      "title": "Login mislykkedes",
+      "description": "Der opstod en fejl under forsøget på at logge ind."
+    },
+    "linkingError": {
+      "title": "Kontolinkning mislykkedes",
+      "description": "Der opstod en fejl under forsøget på at linke din konto."
+    },
+    "completeRegister": {
+      "title": "Udfyld dine data",
+      "description": "Du skal fuldføre din registrering ved at angive din e-mailadresse og navn."
+    },
+    "accountNotFound": {
+      "title": "Konto ikke fundet",
+      "description": "Vi kunne ikke finde en konto, der er knyttet til din identitetsudbyder-legitimationsoplysninger.",
+      "info": "Der blev ikke fundet nogen eksisterende konto. Log venligst ind med en eksisterende konto, eller kontakt din administrator for at få hjælp.",
+      "backToLogin": "Tilbage til Login"
+    },
+    "registrationFailed": {
+      "title": "Tilmelding ikke tilgængelig",
+      "description": "Vi kunne ikke fuldføre registreringsprocessen.",
+      "info": "Kan ikke bestemme organisationen for registrering. Kontakt venligst din administrator for at få hjælp.",
+      "backToLogin": "Tilbage til Login"
+    }
+  },
+  "ldap": {
+    "title": "LDAP-login",
+    "description": "Indtast dine LDAP-legitimationsoplysninger.",
+    "submit": "Fortsætte",
+    "labels": {
+      "username": "Brugernavn",
+      "password": "Adgangskode"
+    },
+    "required": {
+      "username": "Dette felt er påkrævet",
+      "password": "Dette felt er påkrævet"
+    }
+  },
+  "mfa": {
+    "verify": {
+      "title": "Bekræft din identitet",
+      "description": "Vælg en af ​​følgende faktorer.",
+      "noResults": "Ingen andre faktorer tilgængelige for opsætning."
+    },
+    "set": {
+      "title": "Opsæt 2-faktor",
+      "description": "Vælg en af ​​følgende andre faktorer.",
+      "skip": "Springe"
+    }
+  },
+  "otp": {
+    "verify": {
+      "title": "Bekræft 2-faktor",
+      "totpDescription": "Indtast koden fra din autentificeringsapp.",
+      "smsDescription": "Indtast den kode du har modtaget via SMS.",
+      "emailDescription": "Indtast den kode du har modtaget via e-mail.",
+      "noCodeReceived": "Har du ikke modtaget en kode?",
+      "resendCode": "Send kode igen",
+      "submit": "Fortsætte",
+      "labels": {
+        "code": "Kode"
+      },
+      "required": {
+        "code": "Dette felt er påkrævet"
+      }
+    },
+    "set": {
+      "title": "Opsæt 2-faktor",
+      "totpDescription": "Scan QR-koden med din autentificeringsapp.",
+      "smsDescription": "Indtast dit telefonnummer for at modtage en kode via SMS.",
+      "emailDescription": "Indtast din e-mailadresse for at modtage en kode via e-mail.",
+      "totpRegisterDescription": "Scan QR-koden eller naviger til URL'en manuelt.",
+      "submit": "Fortsætte",
+      "labels": {
+        "code": "Kode"
+      },
+      "required": {
+        "code": "Dette felt er påkrævet"
+      }
+    }
+  },
+  "passkey": {
+    "verify": {
+      "title": "Godkend med en adgangsnøgle",
+      "description": "Din enhed vil bede om dit fingeraftryk, ansigt eller skærmlås",
+      "usePassword": "Brug adgangskode",
+      "submit": "Fortsætte"
+    },
+    "set": {
+      "title": "Indstil en adgangsnøgle",
+      "description": "Din enhed vil bede om dit fingeraftryk, ansigt eller skærmlås",
+      "info": {
+        "description": "En adgangsnøgle er en godkendelsesmetode på en enhed som dit fingeraftryk, Apple FaceID eller lignende.",
+        "link": "Adgangskodeløs godkendelse"
+      },
+      "skip": "Springe",
+      "submit": "Fortsætte"
+    }
+  },
+  "u2f": {
+    "verify": {
+      "title": "Bekræft 2-faktor",
+      "description": "Bekræft din konto med din enhed."
+    },
+    "set": {
+      "title": "Opsæt 2-faktor",
+      "description": "Konfigurer en enhed som en anden faktor.",
+      "submit": "Fortsætte"
+    }
+  },
+  "register": {
+    "methods": {
+      "passkey": "Adgangsnøgle",
+      "password": "Adgangskode"
+    },
+    "disabled": {
+      "title": "Registrering deaktiveret",
+      "description": "Registreringen er deaktiveret. Kontakt venligst din administrator."
+    },
+    "missingdata": {
+      "title": "Manglende data",
+      "description": "Angiv e-mail, for- og efternavn for at registrere."
+    },
+    "title": "Register",
+    "description": "Opret din VisOpus-konto.",
+    "noMethodAvailableWarning": "Ingen tilgængelig godkendelsesmetode. Kontakt venligst din administrator.",
+    "selectMethod": "Vælg den metode, du vil godkende",
+    "agreeTo": "For at registrere dig skal du acceptere vilkårene og betingelserne",
+    "termsOfService": "Servicevilkår",
+    "privacyPolicy": "Privatlivspolitik",
+    "submit": "Fortsætte",
+    "password": {
+      "title": "Indstil adgangskode",
+      "description": "Indstil adgangskoden til din konto",
+      "submit": "Fortsætte",
+      "labels": {
+        "password": "Adgangskode",
+        "confirmPassword": "Bekræft adgangskode"
+      },
+      "required": {
+        "password": "Du skal angive en adgangskode!",
+        "confirmPassword": "Dette felt er påkrævet"
+      }
+    },
+    "labels": {
+      "firstname": "Fornavn",
+      "lastname": "Efternavn",
+      "email": "E-mail"
+    },
+    "required": {
+      "firstname": "Dette felt er påkrævet",
+      "lastname": "Dette felt er påkrævet",
+      "email": "Dette felt er påkrævet"
+    },
+    "errors": {
+      "couldNotCreateUser": "Kunne ikke oprette bruger",
+      "couldNotCreateSession": "Kunne ikke oprette session",
+      "userNotFound": "Bruger ikke fundet i systemet",
+      "couldNotLinkIDP": "Kunne ikke linke IDP til brugeren",
+      "couldNotRegisterUser": "Kunne ikke registrere bruger"
+    }
+  },
+  "invite": {
+    "title": "Inviter bruger",
+    "description": "Angiv e-mailadressen og navnet på den bruger, du vil invitere.",
+    "info": "Brugeren vil modtage en e-mail med yderligere instruktioner.",
+    "notAllowed": "Dine indstillinger tillader dig ikke at invitere brugere.",
+    "submit": "Fortsætte",
+    "success": {
+      "title": "Bruger inviteret",
+      "description": "E-mailen er blevet sendt.",
+      "verified": "Brugeren er blevet inviteret og har allerede bekræftet sin e-mail.",
+      "notVerifiedYet": "Brugeren er inviteret. De vil modtage en e-mail med yderligere instruktioner.",
+      "submit": "Inviter en anden bruger"
+    }
+  },
+  "signedin": {
+    "title": "Velkommen {user}!",
+    "description": "Du er logget ind.",
+    "continue": "Fortsætte",
+    "error": {
+      "title": "Fejl",
+      "description": "Der opstod en fejl under forsøget på at logge ind."
+    }
+  },
+  "verify": {
+    "userIdMissing": "Intet bruger-id angivet!",
+    "successTitle": "Bruger bekræftet",
+    "successDescription": "Brugeren er blevet bekræftet.",
+    "setupAuthenticator": "Opsæt autentificering",
+    "verify": {
+      "title": "Bekræft bruger",
+      "description": "Indtast den kode, der er angivet i bekræftelsesmailen.",
+      "noCodeReceived": "Har du ikke modtaget en kode?",
+      "resendCode": "Send kode igen",
+      "codeSent": "En kode er netop blevet sendt til din e-mailadresse.",
+      "submit": "Fortsætte",
+      "labels": {
+        "code": "Kode"
+      },
+      "required": {
+        "code": "Dette felt er påkrævet"
+      }
+    },
+    "errors": {
+      "couldNotResendEmail": "Kunne ikke sende e-mail igen",
+      "couldNotVerifyUser": "Brugeren kunne ikke bekræftes",
+      "couldNotVerifyInvite": "Invitationen kunne ikke bekræftes",
+      "couldNotVerifyEmail": "Kunne ikke bekræfte e-mail",
+      "couldNotVerify": "Kunne ikke bekræfte",
+      "couldNotLoadUser": "Kunne ikke indlæse bruger",
+      "couldNotLoadAuthenticators": "Kunne ikke indlæse mulige godkendelser",
+      "couldNotCreateSession": "Kunne ikke oprette session",
+      "noHostFound": "Ingen vært fundet",
+      "userAlreadyVerified": "Brugeren er allerede bekræftet!",
+      "couldNotResendInvite": "Invitationen kunne ikke sendes igen",
+      "inviteSendFailed": "Kunne ikke sende invitationsmail",
+      "emailSendFailed": "Kunne ikke sende bekræftelses-e-mail"
+    }
+  },
+  "authenticator": {
+    "title": "Vælg godkendelsesmetode",
+    "description": "Vælg den metode, du vil godkende",
+    "noMethodsAvailable": "Ingen tilgængelige godkendelsesmetoder",
+    "allSetup": "Du har allerede konfigureret en godkendelse!",
+    "linkWithIDP": "eller link til en identitetsudbyder"
+  },
+  "device": {
+    "usercode": {
+      "title": "Enhedskode",
+      "description": "Indtast koden, der vises på din app eller enhed.",
+      "submit": "Fortsætte",
+      "labels": {
+        "code": "Kode"
+      },
+      "required": {
+        "code": "Dette felt er påkrævet"
+      }
+    },
+    "request": {
+      "title": "{appName} vil gerne forbinde",
+      "description": "{appName} vil have adgang til:",
+      "disclaimer": "Ved at klikke på Tillad tillader du {appName} og VisOpus at bruge dine oplysninger i overensstemmelse med deres respektive servicevilkår og privatlivspolitikker. Du kan til enhver tid tilbagekalde denne adgang.",
+      "submit": "Tillade",
+      "deny": "Nægte"
+    },
+    "scope": {
+      "openid": "Bekræft din identitet.",
+      "email": "Se din e-mailadresse.",
+      "profile": "Se dine fulde profiloplysninger.",
+      "offline_access": "Tillad offlineadgang til din konto."
+    }
+  },
+  "error": {
+    "noUserCode": "Ingen brugerkode angivet!",
+    "noDeviceRequest": "Ingen enhedsanmodning fundet.",
+    "unknownContext": "Kunne ikke hente konteksten for brugeren. Sørg for at indtaste brugernavnet først eller angiv et loginName som searchParam.",
+    "sessionExpired": "Din nuværende session er udløbet. Log venligst på igen.",
+    "failedLoading": "Kunne ikke indlæse data. Prøv venligst igen.",
+    "tryagain": "Prøv igen"
+  },
+  "_meta": {
+    "_status": "machine-translated",
+    "_translatedBy": "google-deep-translator",
+    "_translatedFrom": "en",
+    "_note": "Danish translation produced via Google Translate (free tier). Mark as draft; awaiting human review before production."
+  }
+}

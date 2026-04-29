@@ -1,7 +1,7 @@
 {
   "common": {
     "back": "Back",
-    "title": "Login with Zitadel"
+    "title": "Sign in to VisOpus"
   },
   "accounts": {
     "title": "Accounts",
@@ -295,7 +295,7 @@
       "description": "Provide email, first and last name to register."
     },
     "title": "Register",
-    "description": "Create your ZITADEL account.",
+    "description": "Create your VisOpus account.",
     "noMethodAvailableWarning": "No authentication method available. Please contact your administrator.",
     "selectMethod": "Select the method you would like to authenticate",
     "agreeTo": "To register you must agree to the terms and conditions",
@@ -413,7 +413,7 @@
     "request": {
       "title": "{appName} would like to connect",
       "description": "{appName} will have access to:",
-      "disclaimer": "By clicking Allow, you allow {appName} and Zitadel to use your information in accordance with their respective terms of service and privacy policies. You can revoke this access at any time.",
+      "disclaimer": "By clicking Allow, you allow {appName} and VisOpus to use your information in accordance with their respective terms of service and privacy policies. You can revoke this access at any time.",
       "submit": "Allow",
       "deny": "Deny"
     },

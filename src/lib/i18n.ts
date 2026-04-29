@@ -3,42 +3,28 @@ export interface Lang {
   code: string;
 }
 
+// VisOpus locale set — matches the Frontend (test.visopus.com).
+// Adding new locales? Also drop a `locales/<code>.json` and update Backend i18n provisioning.
 export const LANGS: Lang[] = [
   {
     name: "English",
     code: "en",
   },
   {
+    name: "Norsk bokmål",
+    code: "nb",
+  },
+  {
     name: "Deutsch",
     code: "de",
   },
   {
-    name: "Italiano",
-    code: "it",
+    name: "Nederlands",
+    code: "nl",
   },
   {
-    name: "Español",
-    code: "es",
-  },
-  {
-    name: "Polski",
-    code: "pl",
-  },
-  {
-    name: "简体中文",
-    code: "zh",
-  },
-  {
-    name: "Русский",
-    code: "ru",
-  },  
-  {
-    name: "Türkçe",
-    code: "tr",
-  },
-  {
-    name: "日本語",
-    code: "ja",
+    name: "Dansk",
+    code: "da",
   },
 ];
 
