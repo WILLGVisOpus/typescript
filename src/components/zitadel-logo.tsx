@@ -1,19 +1,12 @@
+// Backward-compatible alias — VisOpus rebrand replaces the upstream Zitadel mark.
+// New code should import { Logo } from "@/components/logo".
+import { Logo } from "@/components/logo";
+
 type Props = {
   height?: number;
   width?: number;
 };
 
-export function ZitadelLogo({ height = 40, width = 147.5 }: Props) {
-  return (
-    <>
-      <div className="hidden dark:flex">
-        {/* <ZitadelLogoLight /> */}
-
-        <img height={height} width={width} src="/zitadel-logo-light.svg" alt="zitadel logo" />
-      </div>
-      <div className="flex dark:hidden">
-        <img height={height} width={width} src="/zitadel-logo-dark.svg" alt="zitadel logo" />
-      </div>
-    </>
-  );
+export function ZitadelLogo({ height = 64, width = 64 }: Props) {
+  return <Logo height={height} width={width} />;
 }

@@ -1,32 +1,15 @@
-// Default <head> tags we want shared across the app
+// Default <head> tags shared across the app. Next.js App Router auto-handles
+// /icon.svg and /favicon.ico, so this component is mostly redundant — kept for
+// any legacy callers and to surface the manifest link.
 export function DefaultTags() {
   return (
     <>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link
-        href="/favicon/apple-touch-icon.png"
-        rel="apple-touch-icon"
-        sizes="180x180"
-      />
-      <link
-        href="/favicon/favicon-32x32.png"
-        rel="icon"
-        sizes="32x32"
-        type="image/png"
-      />
-      <link
-        href="/favicon/favicon-16x16.png"
-        rel="icon"
-        sizes="16x16"
-        type="image/png"
-      />
+      <link href="/icon-192.png" rel="apple-touch-icon" sizes="192x192" />
+      <link href="/icon.svg" rel="icon" type="image/svg+xml" />
+      <link href="/favicon.ico" rel="shortcut icon" />
       <link href="/favicon/site.webmanifest" rel="manifest" />
-      {/* <link
-        color="#000000"
-        href="/favicon/safari-pinned-tab.svg"
-        rel="mask-icon"
-      /> */}
-      <link href="/favicon/favicon.ico" rel="shortcut icon" />
+      <meta name="theme-color" content="#0a1628" />
     </>
   );
 }
