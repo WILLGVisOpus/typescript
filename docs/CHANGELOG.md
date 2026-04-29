@@ -5,6 +5,20 @@ zitadel/zitadel changes are not duplicated here.
 
 ## [Unreleased]
 
+### Added — Soft-required MFA: `decideMfaGate` decision function (Issue #206, Task 2.4)
+
+- **`src/lib/server/visopus-mfa-gate.ts`** — pure decision function
+  returning `"satisfied" | "challenge" | "setup"` for the post-password
+  step. Order: verified MFA factor → recovery bypass marker → 30-day
+  grace → enrolled-but-not-verified → setup.
+- Password is explicitly excluded from the MFA factor list; only
+  `totp`, `webAuthN`, `otpSms`, `otpEmail` count.
+- Defensive: malformed grace_until strings treated as absent.
+- 13 vitest tests cover every branch + precedence (grace beats enrolled,
+  password-only doesn't satisfy, malformed dates).
+- **Phase 2 complete** — fork-side wrappers ready for Phase 3 page
+  work. Full vitest suite at 261 passed.
+
 ### Added — Soft-required MFA: HMAC-signed backend client (Issue #206, Task 2.3)
 
 - **`src/lib/server/visopus-backend.ts`** — typed client for the Phase 1
