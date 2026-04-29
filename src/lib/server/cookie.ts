@@ -198,6 +198,7 @@ export async function setSessionAndUpdateCookie(command: {
   challenges?: RequestChallenges;
   requestId?: string;
   lifetime: Duration;
+  metadata?: Record<string, Uint8Array>;
 }) {
   const _headers = await headers();
   const { serviceUrl } = getServiceUrlFromHeaders(_headers);
@@ -209,6 +210,7 @@ export async function setSessionAndUpdateCookie(command: {
     challenges: command.challenges,
     checks: command.checks,
     lifetime: command.lifetime,
+    metadata: command.metadata,
   })
     .then((updatedSession) => {
       if (updatedSession) {
